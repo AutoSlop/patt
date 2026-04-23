@@ -35,14 +35,14 @@ export default function FAQ() {
   return (
     <div className="space-y-3 max-w-3xl mx-auto">
       {faqs.map((faq, i) => (
-        <div key={i} className="bg-white rounded-xl border border-gray-100 overflow-hidden">
+        <div key={i} className="bg-white rounded-xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
           <button
             onClick={() => setOpen(open === i ? null : i)}
-            className="w-full flex items-center justify-between px-6 py-4 text-left cursor-pointer"
+            className="w-full flex items-center justify-between px-6 py-5 text-left cursor-pointer"
           >
             <span className="font-semibold text-gray-900 pr-4">{faq.q}</span>
             <svg
-              className={`w-5 h-5 text-primary shrink-0 transition-transform ${open === i ? "rotate-180" : ""}`}
+              className={`w-5 h-5 text-primary shrink-0 transition-transform duration-200 ${open === i ? "rotate-180" : ""}`}
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -52,7 +52,7 @@ export default function FAQ() {
             </svg>
           </button>
           {open === i && (
-            <div className="px-6 pb-4 text-gray-600 leading-relaxed">{faq.a}</div>
+            <div className="px-6 pb-5 text-gray-600 leading-relaxed text-sm">{faq.a}</div>
           )}
         </div>
       ))}

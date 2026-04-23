@@ -23,10 +23,10 @@ export default function PricingCard({
   return (
     <>
       <div
-        className={`rounded-2xl p-8 flex flex-col ${
+        className={`rounded-2xl p-8 flex flex-col transition-all duration-200 ${
           highlighted
-            ? "bg-primary text-white ring-4 ring-primary/20 scale-[1.02]"
-            : "bg-white text-gray-900 border border-gray-100"
+            ? "bg-primary text-white ring-4 ring-primary/20 shadow-xl shadow-primary/15 scale-[1.02]"
+            : "bg-white text-gray-900 border border-gray-100 shadow-sm hover:shadow-md hover:border-gray-200"
         }`}
       >
         {highlighted && (
@@ -38,15 +38,15 @@ export default function PricingCard({
         <p className={`text-sm mt-1 ${highlighted ? "text-white/80" : "text-gray-500"}`}>
           {description}
         </p>
-        <div className="mt-4 mb-6">
-          <span className="text-4xl font-extrabold">{price}</span>
+        <div className="mt-5 mb-7">
+          <span className="text-4xl font-extrabold tracking-tight">{price}</span>
           <span className={`text-sm ${highlighted ? "text-white/70" : "text-gray-500"}`}>
             /mes
           </span>
         </div>
         <ul className="space-y-3 mb-8 flex-1">
           {features.map((f, i) => (
-            <li key={i} className="flex items-start gap-2 text-sm">
+            <li key={i} className="flex items-start gap-2.5 text-sm">
               <svg
                 className={`w-5 h-5 shrink-0 mt-0.5 ${highlighted ? "text-accent" : "text-primary"}`}
                 fill="none"
@@ -62,10 +62,10 @@ export default function PricingCard({
         </ul>
         <button
           onClick={() => setShowModal(true)}
-          className={`w-full py-3 rounded-lg font-semibold transition-colors cursor-pointer ${
+          className={`w-full py-3.5 rounded-xl font-bold transition-all cursor-pointer ${
             highlighted
-              ? "bg-white text-primary hover:bg-gray-100"
-              : "bg-primary text-white hover:bg-primary-dark"
+              ? "bg-white text-primary hover:bg-gray-100 shadow-sm"
+              : "bg-primary text-white hover:bg-primary-dark shadow-sm"
           }`}
         >
           Empieza ahora
