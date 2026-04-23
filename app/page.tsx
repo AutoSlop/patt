@@ -103,6 +103,12 @@ export default function Home() {
             >
               Habla con nosotros
             </a>
+            <a
+              href="/login"
+              className="border border-primary text-primary hover:bg-primary hover:text-white font-semibold px-5 py-2 rounded-lg transition-colors text-sm"
+            >
+              Inicia sesión
+            </a>
           </div>
         </div>
       </nav>
