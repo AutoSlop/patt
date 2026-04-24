@@ -4,10 +4,17 @@ import { useState } from "react";
 
 const navItems = [
   {
-    id: "resumen",
-    label: "Resumen",
+    id: "dashboard",
+    label: "Dashboard",
     icon: (
       <path strokeLinecap="round" strokeLinejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1h-2z" />
+    ),
+  },
+  {
+    id: "pacientes",
+    label: "Pacientes",
+    icon: (
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
     ),
   },
   {
@@ -18,10 +25,10 @@ const navItems = [
     ),
   },
   {
-    id: "pacientes",
-    label: "Pacientes",
+    id: "conversaciones",
+    label: "Conversaciones",
     icon: (
-      <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
     ),
   },
   {
@@ -38,13 +45,20 @@ const navItems = [
       <path strokeLinecap="round" strokeLinejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
     ),
   },
+  {
+    id: "configuracion",
+    label: "Configuración",
+    icon: (
+      <path strokeLinecap="round" strokeLinejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+    ),
+  },
 ];
 
 const statCards = [
-  { label: "Citas hoy", value: "12", change: "+3 vs. ayer", color: "bg-primary/10 text-primary" },
-  { label: "Pacientes activos", value: "348", change: "+18 este mes", color: "bg-blue-50 text-blue-600" },
-  { label: "Ingresos del mes", value: "$4.2M", change: "+12% vs. anterior", color: "bg-amber-50 text-amber-600" },
-  { label: "Citas perdidas", value: "3", change: "-62% con PATT", color: "bg-red-50 text-red-500" },
+  { label: "Citas de hoy", value: "12", change: "+3 vs. ayer", color: "bg-primary/10 text-primary" },
+  { label: "Conversaciones pendientes", value: "8", change: "3 nuevas", color: "bg-blue-50 text-blue-600" },
+  { label: "Recordatorios enviados", value: "47", change: "92% tasa apertura", color: "bg-amber-50 text-amber-600" },
+  { label: "Pagos por confirmar", value: "5", change: "$1.8M pendiente", color: "bg-red-50 text-red-500" },
 ];
 
 const todayAppointments = [
@@ -63,7 +77,7 @@ const recentPatients = [
 ];
 
 export default function AdminPage() {
-  const [activeSection, setActiveSection] = useState("resumen");
+  const [activeSection, setActiveSection] = useState("dashboard");
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
@@ -123,6 +137,7 @@ export default function AdminPage() {
             >
               <svg className="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 {item.icon}
+                {item.id === "configuracion" && <circle cx="12" cy="12" r="3" />}
               </svg>
               {item.label}
             </button>
@@ -169,18 +184,24 @@ export default function AdminPage() {
               {navItems.find((n) => n.id === activeSection)?.label ?? "Resumen"}
             </h1>
           </div>
-          <div className="flex items-center gap-3">
-            <span className="hidden sm:inline text-sm text-gray-500">Hoy: 23 abr 2026</span>
-            <div className="w-8 h-8 bg-primary/15 rounded-full flex items-center justify-center">
-              <span className="text-primary font-bold text-xs">CM</span>
+          <div className="flex items-center gap-4">
+            <span className="hidden sm:inline text-sm text-gray-500">Hoy: 24 abr 2026</span>
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 bg-primary/15 rounded-full flex items-center justify-center">
+                <span className="text-primary font-bold text-xs">CM</span>
+              </div>
+              <div className="hidden sm:block">
+                <p className="text-sm font-semibold text-gray-900 leading-tight">Clínica VetAmigo</p>
+                <p className="text-xs text-gray-400">Admin</p>
+              </div>
             </div>
           </div>
         </header>
 
         {/* Page content */}
         <main className="flex-1 p-4 sm:p-6 overflow-y-auto">
-          {/* Resumen */}
-          {activeSection === "resumen" && (
+          {/* Dashboard */}
+          {activeSection === "dashboard" && (
             <div className="space-y-6">
               {/* Stat cards */}
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
@@ -196,50 +217,86 @@ export default function AdminPage() {
                 ))}
               </div>
 
-              {/* Today's appointments */}
-              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm">
-                <div className="px-5 py-4 border-b border-gray-100 flex items-center justify-between">
-                  <h2 className="font-bold text-gray-900">Citas de hoy</h2>
-                  <span className="text-xs text-primary font-semibold bg-primary/10 px-2.5 py-1 rounded-full">
-                    {todayAppointments.length} citas
-                  </span>
-                </div>
-                <div className="divide-y divide-gray-50">
-                  {todayAppointments.map((apt, i) => (
-                    <div key={i} className="px-5 py-3.5 flex items-center gap-4">
-                      <span className="text-sm font-medium text-gray-500 w-20 shrink-0">{apt.time}</span>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-semibold text-gray-900">{apt.pet} <span className="font-normal text-gray-500">— {apt.owner}</span></p>
-                        <p className="text-xs text-gray-400">{apt.service}</p>
+              <div className="grid lg:grid-cols-2 gap-6">
+                {/* Today's appointments */}
+                <div className="bg-white rounded-2xl border border-gray-100 shadow-sm">
+                  <div className="px-5 py-4 border-b border-gray-100 flex items-center justify-between">
+                    <h2 className="font-bold text-gray-900">Próximas citas</h2>
+                    <span className="text-xs text-primary font-semibold bg-primary/10 px-2.5 py-1 rounded-full">
+                      {todayAppointments.length} citas
+                    </span>
+                  </div>
+                  <div className="divide-y divide-gray-50">
+                    {todayAppointments.map((apt, i) => (
+                      <div key={i} className="px-5 py-3.5 flex items-center gap-4">
+                        <span className="text-sm font-medium text-gray-500 w-20 shrink-0">{apt.time}</span>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-semibold text-gray-900">{apt.pet} <span className="font-normal text-gray-500">— {apt.owner}</span></p>
+                          <p className="text-xs text-gray-400">{apt.service}</p>
+                        </div>
+                        <span className={`text-xs font-medium px-2.5 py-1 rounded-full shrink-0 ${
+                          apt.status === "Confirmada"
+                            ? "bg-green-50 text-green-600"
+                            : "bg-amber-50 text-amber-600"
+                        }`}>
+                          {apt.status}
+                        </span>
                       </div>
-                      <span className={`text-xs font-medium px-2.5 py-1 rounded-full shrink-0 ${
-                        apt.status === "Confirmada"
-                          ? "bg-green-50 text-green-600"
-                          : "bg-amber-50 text-amber-600"
-                      }`}>
-                        {apt.status}
-                      </span>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
+                </div>
+
+                {/* Cirugías / pagos pendientes */}
+                <div className="bg-white rounded-2xl border border-gray-100 shadow-sm">
+                  <div className="px-5 py-4 border-b border-gray-100 flex items-center justify-between">
+                    <h2 className="font-bold text-gray-900">Cirugías y pagos pendientes</h2>
+                    <span className="text-xs text-amber-600 font-semibold bg-amber-50 px-2.5 py-1 rounded-full">
+                      3 pendientes
+                    </span>
+                  </div>
+                  <div className="divide-y divide-gray-50">
+                    {[
+                      { pet: "Rocky", owner: "Ana Rodríguez", procedure: "Esterilización", amount: "$450K", status: "Cuota 1/3 pagada" },
+                      { pet: "Luna", owner: "María García", procedure: "Limpieza dental", amount: "$280K", status: "Sin pago inicial" },
+                      { pet: "Toby", owner: "Pedro Sánchez", procedure: "Cirugía de ligamento", amount: "$1.2M", status: "Cuota 2/4 pendiente" },
+                    ].map((item, i) => (
+                      <div key={i} className="px-5 py-3.5 flex items-center gap-4">
+                        <div className="w-9 h-9 bg-amber-50 rounded-full flex items-center justify-center shrink-0">
+                          <span className="text-amber-600 font-bold text-xs">{item.pet[0]}</span>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-semibold text-gray-900">{item.pet} <span className="font-normal text-gray-500">— {item.procedure}</span></p>
+                          <p className="text-xs text-gray-400">{item.owner} · {item.status}</p>
+                        </div>
+                        <span className="text-sm font-bold text-gray-900 shrink-0">{item.amount}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
 
-              {/* Recent patients */}
+              {/* Actividad reciente */}
               <div className="bg-white rounded-2xl border border-gray-100 shadow-sm">
                 <div className="px-5 py-4 border-b border-gray-100">
-                  <h2 className="font-bold text-gray-900">Pacientes recientes</h2>
+                  <h2 className="font-bold text-gray-900">Actividad reciente</h2>
                 </div>
                 <div className="divide-y divide-gray-50">
-                  {recentPatients.map((p, i) => (
+                  {[
+                    { icon: "bg-green-50 text-green-600", action: "Cita confirmada", detail: "Max — Consulta general con Dra. Mendoza", time: "Hace 12 min" },
+                    { icon: "bg-blue-50 text-blue-600", action: "Recordatorio enviado", detail: "Luna — Vacunación mañana a las 10:30 a.m.", time: "Hace 25 min" },
+                    { icon: "bg-amber-50 text-amber-600", action: "Pago recibido", detail: "Rocky — Cuota 1/3 esterilización ($150K)", time: "Hace 1 hora" },
+                    { icon: "bg-primary/10 text-primary", action: "Nuevo paciente", detail: "Coco registrado por Laura Martínez vía WhatsApp", time: "Hace 2 horas" },
+                    { icon: "bg-red-50 text-red-500", action: "Cita cancelada", detail: "Milo — Control post-cirugía reagendado al 26 abr", time: "Hace 3 horas" },
+                  ].map((item, i) => (
                     <div key={i} className="px-5 py-3.5 flex items-center gap-4">
-                      <div className="w-9 h-9 bg-primary/10 rounded-full flex items-center justify-center shrink-0">
-                        <span className="text-primary font-bold text-xs">{p.name[0]}</span>
+                      <div className={`w-9 h-9 rounded-full flex items-center justify-center shrink-0 ${item.icon.split(" ")[0]}`}>
+                        <div className={`w-2.5 h-2.5 rounded-full ${item.icon.split(" ")[1]} bg-current`} />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-semibold text-gray-900">{p.name} <span className="font-normal text-gray-400">({p.species} — {p.breed})</span></p>
-                        <p className="text-xs text-gray-400">Dueño: {p.owner}</p>
+                        <p className="text-sm font-semibold text-gray-900">{item.action}</p>
+                        <p className="text-xs text-gray-400">{item.detail}</p>
                       </div>
-                      <span className="hidden sm:inline text-xs text-gray-400 shrink-0">{p.lastVisit}</span>
+                      <span className="text-xs text-gray-400 shrink-0 hidden sm:inline">{item.time}</span>
                     </div>
                   ))}
                 </div>
@@ -372,6 +429,86 @@ export default function AdminPage() {
                   <p className="text-2xl font-extrabold text-green-700">23</p>
                   <p className="text-sm text-green-600 mt-1">Facturas emitidas</p>
                 </div>
+              </div>
+            </div>
+          )}
+
+          {/* Conversaciones */}
+          {activeSection === "conversaciones" && (
+            <div className="space-y-6">
+              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 text-center">
+                <div className="w-16 h-16 bg-green-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-8 h-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                  </svg>
+                </div>
+                <h2 className="text-xl font-bold text-gray-900 mb-2">Conversaciones de WhatsApp</h2>
+                <p className="text-gray-500 text-sm max-w-md mx-auto mb-6">
+                  Visualiza y gestiona todas las conversaciones de WhatsApp con tus clientes. Las citas y consultas se registran automáticamente.
+                </p>
+              </div>
+              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm">
+                <div className="px-5 py-4 border-b border-gray-100 flex items-center justify-between">
+                  <h3 className="font-bold text-gray-900 text-sm">Conversaciones recientes</h3>
+                  <span className="text-xs text-green-600 font-semibold bg-green-50 px-2.5 py-1 rounded-full">8 pendientes</span>
+                </div>
+                <div className="divide-y divide-gray-50">
+                  {[
+                    { name: "Carlos Pérez", pet: "Max", message: "Hola, quiero agendar una cita para Max", time: "Hace 5 min", unread: true },
+                    { name: "María García", pet: "Luna", message: "¿A qué hora es la cita de mañana?", time: "Hace 15 min", unread: true },
+                    { name: "Ana Rodríguez", pet: "Rocky", message: "Gracias por el recordatorio 👍", time: "Hace 1 hora", unread: false },
+                    { name: "Juan López", pet: "Milo", message: "¿Puedo reagendar el control?", time: "Hace 2 horas", unread: true },
+                    { name: "Laura Martínez", pet: "Coco", message: "Listo, confirmado. Gracias!", time: "Hace 3 horas", unread: false },
+                  ].map((conv, i) => (
+                    <div key={i} className="px-5 py-3.5 flex items-center gap-4">
+                      <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center shrink-0 relative">
+                        <span className="text-primary font-bold text-xs">{conv.name.split(" ").map(n => n[0]).join("")}</span>
+                        {conv.unread && <div className="absolute -top-0.5 -right-0.5 w-3 h-3 bg-green-500 rounded-full border-2 border-white" />}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-semibold text-gray-900">{conv.name} <span className="font-normal text-gray-400">· {conv.pet}</span></p>
+                        <p className="text-xs text-gray-400 truncate">{conv.message}</p>
+                      </div>
+                      <span className="text-xs text-gray-400 shrink-0 hidden sm:inline">{conv.time}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Configuración */}
+          {activeSection === "configuracion" && (
+            <div className="space-y-6">
+              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 text-center">
+                <div className="w-16 h-16 bg-gray-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-8 h-8 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                </div>
+                <h2 className="text-xl font-bold text-gray-900 mb-2">Configuración</h2>
+                <p className="text-gray-500 text-sm max-w-md mx-auto mb-6">
+                  Personaliza tu clínica, horarios, servicios, integraciones y preferencias de notificación.
+                </p>
+              </div>
+              <div className="grid sm:grid-cols-2 gap-4">
+                {[
+                  { title: "Datos de la clínica", desc: "Nombre, dirección, teléfono y logo de tu veterinaria", icon: "🏥" },
+                  { title: "Horarios y servicios", desc: "Configura horarios de atención y servicios disponibles", icon: "🕐" },
+                  { title: "WhatsApp Business", desc: "Conexión y configuración de tu número de WhatsApp", icon: "💬" },
+                  { title: "Notificaciones", desc: "Personaliza recordatorios y mensajes automáticos", icon: "🔔" },
+                  { title: "Facturación DIAN", desc: "Datos fiscales y configuración de facturación electrónica", icon: "🧾" },
+                  { title: "Equipo", desc: "Administra veterinarios y permisos de acceso", icon: "👥" },
+                ].map((item, i) => (
+                  <div key={i} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex items-start gap-4 hover:border-primary/30 transition-colors cursor-pointer">
+                    <span className="text-2xl">{item.icon}</span>
+                    <div>
+                      <h3 className="text-sm font-bold text-gray-900">{item.title}</h3>
+                      <p className="text-xs text-gray-400 mt-1">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           )}

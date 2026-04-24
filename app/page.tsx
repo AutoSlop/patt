@@ -94,23 +94,23 @@ export default function Home() {
             </div>
             <span className="text-xl font-extrabold tracking-tight text-gray-900">PATT</span>
           </div>
-          <div className="hidden sm:flex items-center gap-7 text-sm font-medium text-gray-500">
-            <a href="#como-funciona" className="hover:text-primary transition-colors">Cómo funciona</a>
-            <a href="#features" className="hover:text-primary transition-colors">Funcionalidades</a>
-            <a href="#precios" className="hover:text-primary transition-colors">Precios</a>
+          <div className="flex items-center gap-4 sm:gap-7 text-sm font-medium text-gray-500">
+            <a href="#como-funciona" className="hidden sm:inline hover:text-primary transition-colors">Cómo funciona</a>
+            <a href="#features" className="hidden sm:inline hover:text-primary transition-colors">Funcionalidades</a>
+            <a href="#precios" className="hidden sm:inline hover:text-primary transition-colors">Precios</a>
             <a
               href={WA_URL}
               target="_blank"
               rel="noopener noreferrer"
               data-track="click_whatsapp"
               data-track-label="nav"
-              className="bg-primary hover:bg-primary-dark text-white font-semibold px-5 py-2.5 rounded-xl transition-colors text-sm shadow-sm shadow-primary/20"
+              className="hidden sm:inline-flex bg-primary hover:bg-primary-dark text-white font-semibold px-5 py-2.5 rounded-xl transition-colors text-sm shadow-sm shadow-primary/20"
             >
               Habla con nosotros
             </a>
             <a
               href="/login"
-              className="border border-gray-200 text-gray-700 hover:border-primary hover:text-primary font-semibold px-5 py-2.5 rounded-xl transition-colors text-sm"
+              className="border border-gray-200 text-gray-700 hover:border-primary hover:text-primary font-semibold px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl transition-colors text-sm"
             >
               Inicia sesión
             </a>
