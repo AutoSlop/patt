@@ -33,14 +33,14 @@ export default function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <div className="space-y-3 max-w-3xl mx-auto">
+    <div className="space-y-2.5 max-w-3xl mx-auto">
       {faqs.map((faq, i) => (
-        <div key={i} className="bg-white rounded-2xl border border-gray-100/80 overflow-hidden shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.06)] transition-shadow">
+        <div key={i} className="bg-white rounded-2xl border border-gray-100/60 overflow-hidden shadow-[0_1px_2px_rgba(0,0,0,0.03)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.05)] transition-shadow">
           <button
             onClick={() => setOpen(open === i ? null : i)}
-            className="w-full flex items-center justify-between px-7 py-6 text-left cursor-pointer"
+            className="w-full flex items-center justify-between px-6 py-5 text-left cursor-pointer"
           >
-            <span className="font-semibold text-gray-900 pr-4">{faq.q}</span>
+            <span className="font-semibold text-text pr-4 text-[0.9375rem]">{faq.q}</span>
             <svg
               className={`w-5 h-5 text-primary shrink-0 transition-transform duration-200 ${open === i ? "rotate-180" : ""}`}
               fill="none"
@@ -52,7 +52,7 @@ export default function FAQ() {
             </svg>
           </button>
           {open === i && (
-            <div className="faq-answer px-7 pb-6 text-gray-500 leading-relaxed text-[0.9rem]">{faq.a}</div>
+            <div className="faq-answer px-6 pb-5 text-gray-400 leading-relaxed text-sm">{faq.a}</div>
           )}
         </div>
       ))}

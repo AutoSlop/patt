@@ -36,10 +36,10 @@ export default function LeadForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white/[0.08] backdrop-blur-md rounded-2xl p-7 sm:p-9 border border-white/[0.08] space-y-4 shadow-xl shadow-black/10"
+      className="bg-white/[0.07] backdrop-blur-xl rounded-2xl p-6 sm:p-8 border border-white/[0.08] space-y-3.5 shadow-2xl shadow-black/15"
     >
-      <h3 className="text-xl font-bold text-white mb-1">Solicita tu demo gratis</h3>
-      <p className="text-white/60 text-sm mb-4">Te contactamos por WhatsApp en menos de 24 horas.</p>
+      <h3 className="text-lg font-bold text-white mb-0.5">Solicita tu demo gratis</h3>
+      <p className="text-white/50 text-[0.8125rem] mb-3">Te contactamos por WhatsApp en menos de 24 horas.</p>
 
       <div className="grid sm:grid-cols-2 gap-4">
         <input

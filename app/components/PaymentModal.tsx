@@ -39,7 +39,7 @@ export default function PaymentModal({ plan, price, onClose }: PaymentModalProps
           <>
             <div className="mb-6">
               <p className="text-sm font-semibold text-primary uppercase tracking-wide">Plan {plan}</p>
-              <p className="text-3xl font-extrabold text-gray-900 mt-1">{price}<span className="text-base font-medium text-gray-400">/mes</span></p>
+              <p className="text-3xl font-extrabold text-text mt-1">{price}<span className="text-base font-medium text-gray-400">/mes</span></p>
             </div>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
@@ -51,7 +51,7 @@ export default function PaymentModal({ plan, price, onClose }: PaymentModalProps
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 focus:ring-2 focus:ring-primary/30 focus:border-primary outline-none transition-all"
+                  className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-text focus:ring-2 focus:ring-primary/30 focus:border-primary outline-none transition-all"
                   placeholder="María García"
                 />
               </div>
@@ -64,7 +64,7 @@ export default function PaymentModal({ plan, price, onClose }: PaymentModalProps
                   required
                   value={cardNumber}
                   onChange={(e) => setCardNumber(e.target.value.replace(/\D/g, "").slice(0, 16))}
-                  className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 focus:ring-2 focus:ring-primary/30 focus:border-primary outline-none transition-all"
+                  className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-text focus:ring-2 focus:ring-primary/30 focus:border-primary outline-none transition-all"
                   placeholder="4242 4242 4242 4242"
                 />
               </div>
@@ -78,7 +78,7 @@ export default function PaymentModal({ plan, price, onClose }: PaymentModalProps
                     required
                     value={expiry}
                     onChange={(e) => setExpiry(e.target.value.replace(/[^\d/]/g, "").slice(0, 5))}
-                    className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 focus:ring-2 focus:ring-primary/30 focus:border-primary outline-none transition-all"
+                    className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-text focus:ring-2 focus:ring-primary/30 focus:border-primary outline-none transition-all"
                     placeholder="MM/AA"
                   />
                 </div>
@@ -91,7 +91,7 @@ export default function PaymentModal({ plan, price, onClose }: PaymentModalProps
                     required
                     value={cvc}
                     onChange={(e) => setCvc(e.target.value.replace(/\D/g, "").slice(0, 4))}
-                    className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 focus:ring-2 focus:ring-primary/30 focus:border-primary outline-none transition-all"
+                    className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-text focus:ring-2 focus:ring-primary/30 focus:border-primary outline-none transition-all"
                     placeholder="123"
                   />
                 </div>
@@ -124,7 +124,7 @@ export default function PaymentModal({ plan, price, onClose }: PaymentModalProps
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <h3 className="text-xl font-bold text-gray-900 mb-2">¡Pago confirmado!</h3>
+            <h3 className="text-xl font-bold text-text mb-2">¡Pago confirmado!</h3>
             <p className="text-gray-600 mb-1">Tu plan <strong>{plan}</strong> está activo.</p>
             <p className="text-sm text-gray-500 mb-6">
               Recibirás un correo con los próximos pasos para configurar PATT en tu veterinaria.

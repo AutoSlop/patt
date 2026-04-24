@@ -25,6 +25,8 @@ body {
   background: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 html {
@@ -33,26 +35,27 @@ html {
 
 /* Card hover lift — premium feel */
 .card-hover {
-  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s ease;
 }
 .card-hover:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 40px rgba(15, 157, 122, 0.08), 0 8px 16px rgba(0, 0, 0, 0.04);
+  transform: translateY(-4px);
+  box-shadow: 0 24px 48px rgba(15, 157, 122, 0.08), 0 12px 24px rgba(0, 0, 0, 0.04);
+  border-color: rgba(15, 157, 122, 0.15);
 }
 
 /* Subtle grid background pattern */
 .bg-grid {
-  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
-  background-size: 28px 28px;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 32px 32px;
 }
 
 /* Pulse animation for badge */
 @keyframes pulse-soft {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
+  50% { opacity: 0.4; }
 }
 .animate-pulse-soft {
-  animation: pulse-soft 2s ease-in-out infinite;
+  animation: pulse-soft 2.5s ease-in-out infinite;
 }
 
 /* Section divider — subtle top border gradient */
@@ -73,7 +76,7 @@ html {
 
 /* Gradient text utility */
 .text-gradient {
-  background: linear-gradient(135deg, #0F9D7A, #11b48d);
+  background: linear-gradient(135deg, #0B7A5E, #0F9D7A, #11b48d);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -94,9 +97,35 @@ html {
 
 /* Smooth FAQ transition */
 .faq-answer {
-  animation: fadeSlideDown 0.2s ease-out;
+  animation: fadeSlideDown 0.25s ease-out;
 }
 @keyframes fadeSlideDown {
-  from { opacity: 0; transform: translateY(-4px); }
+  from { opacity: 0; transform: translateY(-6px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+/* Section label chip */
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #0F9D7A;
+  background: rgba(15, 157, 122, 0.07);
+  padding: 0.375rem 1rem;
+  border-radius: 9999px;
+}
+
+/* Feature icon container */
+.icon-box {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
