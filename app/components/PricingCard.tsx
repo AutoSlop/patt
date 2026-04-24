@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { track } from "../lib/track";
 import PaymentModal from "./PaymentModal";
 
 interface PricingCardProps {
@@ -61,7 +62,7 @@ export default function PricingCard({
           ))}
         </ul>
         <button
-          onClick={() => setShowModal(true)}
+          onClick={() => { track("start_payment", { plan: name, price }); setShowModal(true); }}
           className={`w-full py-3.5 rounded-xl font-bold transition-all cursor-pointer ${
             highlighted
               ? "bg-white text-primary hover:bg-gray-100 shadow-sm"

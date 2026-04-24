@@ -1,5 +1,7 @@
 "use client";
 
+import { track } from "../lib/track";
+
 const WA_URL =
   "https://wa.me/573212266160?text=Hola%20PATT%2C%20quiero%20conocer%20la%20demo%20para%20mi%20veterinaria";
 
@@ -10,6 +12,7 @@ export default function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chatea con nosotros por WhatsApp"
+      onClick={() => track("click_whatsapp", { label: "floating_button" })}
       className="fixed bottom-6 right-6 z-40 bg-[#25D366] hover:bg-[#1EBE5A] text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all hover:scale-105"
     >
       <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
