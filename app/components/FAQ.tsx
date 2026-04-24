@@ -33,9 +33,9 @@ export default function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <div className="space-y-2.5 max-w-3xl mx-auto">
+    <div className="space-y-3 max-w-3xl mx-auto">
       {faqs.map((faq, i) => (
-        <div key={i} className="bg-white rounded-2xl border border-gray-100/60 overflow-hidden shadow-[0_1px_2px_rgba(0,0,0,0.03)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.05)] transition-shadow">
+        <div key={i} className="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:shadow-[0_4px_16px_rgba(0,0,0,0.06)] transition-all hover:border-gray-200/80">
           <button
             onClick={() => setOpen(open === i ? null : i)}
             className="w-full flex items-center justify-between px-6 py-5 text-left cursor-pointer"
