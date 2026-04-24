@@ -33,16 +33,16 @@ export default function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <div className="space-y-3 max-w-3xl mx-auto">
+    <div className="space-y-2.5 max-w-2xl mx-auto">
       {faqs.map((faq, i) => (
-        <div key={i} className="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:shadow-[0_4px_16px_rgba(0,0,0,0.06)] transition-all hover:border-gray-200/80">
+        <div key={i} className="bg-white rounded-xl border border-gray-100/80 overflow-hidden shadow-[0_1px_2px_rgba(0,0,0,0.03)] hover:shadow-[0_2px_8px_rgba(0,0,0,0.05)] transition-all hover:border-gray-200/60">
           <button
             onClick={() => setOpen(open === i ? null : i)}
-            className="w-full flex items-center justify-between px-6 py-5 text-left cursor-pointer"
+            className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer"
           >
-            <span className="font-semibold text-text pr-4 text-[0.9375rem]">{faq.q}</span>
+            <span className="font-semibold text-text pr-4 text-[0.875rem]">{faq.q}</span>
             <svg
-              className={`w-5 h-5 text-primary shrink-0 transition-transform duration-200 ${open === i ? "rotate-180" : ""}`}
+              className={`w-4 h-4 text-primary shrink-0 transition-transform duration-200 ${open === i ? "rotate-180" : ""}`}
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -52,7 +52,7 @@ export default function FAQ() {
             </svg>
           </button>
           {open === i && (
-            <div className="faq-answer px-6 pb-5 text-gray-400 leading-relaxed text-sm">{faq.a}</div>
+            <div className="faq-answer px-5 pb-4 text-gray-400 leading-relaxed text-[0.8125rem]">{faq.a}</div>
           )}
         </div>
       ))}

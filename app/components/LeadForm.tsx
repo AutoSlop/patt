@@ -63,10 +63,10 @@ export default function LeadForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white/[0.08] backdrop-blur-xl rounded-2xl p-7 sm:p-9 border border-white/[0.1] space-y-4 shadow-2xl shadow-black/20"
+      className="bg-white/[0.07] backdrop-blur-xl rounded-2xl p-6 sm:p-8 border border-white/[0.08] space-y-3.5 shadow-2xl shadow-black/15"
     >
-      <h3 className="text-lg font-bold text-white mb-0.5">Solicita tu demo gratis</h3>
-      <p className="text-white/50 text-[0.8125rem] mb-3">Te contactamos por WhatsApp en menos de 24 horas.</p>
+      <h3 className="text-base sm:text-lg font-bold text-white mb-0.5">Solicita tu demo gratis</h3>
+      <p className="text-white/45 text-[0.75rem] sm:text-[0.8125rem] mb-2">Te contactamos por WhatsApp en menos de 24 horas.</p>
 
       <div className="grid sm:grid-cols-2 gap-4">
         <input
@@ -123,7 +123,7 @@ export default function LeadForm() {
 
       <button
         type="submit"
-        className="w-full bg-accent hover:bg-amber-400 text-gray-900 font-bold py-3.5 rounded-xl text-base transition-all shadow-lg shadow-amber-500/25 hover:shadow-xl hover:shadow-amber-500/30 cursor-pointer hover:-translate-y-0.5"
+        className="w-full bg-accent hover:bg-amber-400 text-gray-900 font-bold py-3 rounded-xl text-[0.875rem] sm:text-[0.9375rem] transition-all shadow-lg shadow-amber-500/20 hover:shadow-xl hover:shadow-amber-500/25 cursor-pointer hover:-translate-y-0.5"
       >
         Quiero mi demo
       </button>
