@@ -1,6 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { getSession, logout, type PattUser } from "../lib/auth";
 
 const navItems = [
   {
@@ -77,8 +79,49 @@ const recentPatients = [
 ];
 
 export default function AdminPage() {
+  const router = useRouter();
   const [activeSection, setActiveSection] = useState("dashboard");
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [user, setUser] = useState<PattUser | null>(null);
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    const session = getSession();
+    if (!session) {
+      router.replace("/login");
+      return;
+    }
+    setUser(session);
+    setReady(true);
+  }, [router]);
+
+  const handleLogout = () => {
+    logout();
+    router.push("/login");
+  };
+
+  if (!ready) {
+    return (
+      <div className="min-h-screen bg-bg flex items-center justify-center">
+        <div className="text-center">
+          <svg className="w-8 h-8 animate-spin text-primary mx-auto mb-3" fill="none" viewBox="0 0 24 24">
+            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+          </svg>
+          <p className="text-sm text-gray-500">Cargando panel...</p>
+        </div>
+      </div>
+    );
+  }
+
+  const userInitials = user
+    ? user.name
+        .split(" ")
+        .map((w) => w[0])
+        .join("")
+        .slice(0, 2)
+        .toUpperCase()
+    : "AD";
 
   return (
     <div className="min-h-screen bg-bg flex">
@@ -148,22 +191,22 @@ export default function AdminPage() {
         <div className="px-3 py-4 border-t border-gray-100">
           <div className="flex items-center gap-3 px-3 py-2">
             <div className="w-8 h-8 bg-primary/15 rounded-full flex items-center justify-center">
-              <span className="text-primary font-bold text-xs">CM</span>
+              <span className="text-primary font-bold text-xs">{userInitials}</span>
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-semibold text-gray-900 truncate">Clínica VetAmigo</p>
-              <p className="text-xs text-gray-500 truncate">admin@vetamigo.com</p>
+              <p className="text-sm font-semibold text-gray-900 truncate">{user?.clinicName ?? "Mi Clínica"}</p>
+              <p className="text-xs text-gray-500 truncate">{user?.email ?? ""}</p>
             </div>
           </div>
-          <a
-            href="/login"
+          <button
+            onClick={handleLogout}
             className="mt-2 w-full flex items-center gap-2 px-3 py-2 text-sm text-gray-500 hover:text-red-500 rounded-xl hover:bg-red-50 transition-colors"
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
             </svg>
             Cerrar sesión
-          </a>
+          </button>
         </div>
       </aside>
 
@@ -188,11 +231,11 @@ export default function AdminPage() {
             <span className="hidden sm:inline text-sm text-gray-500">Hoy: 24 abr 2026</span>
             <div className="flex items-center gap-2.5">
               <div className="w-8 h-8 bg-primary/15 rounded-full flex items-center justify-center">
-                <span className="text-primary font-bold text-xs">CM</span>
+                <span className="text-primary font-bold text-xs">{userInitials}</span>
               </div>
               <div className="hidden sm:block">
-                <p className="text-sm font-semibold text-gray-900 leading-tight">Clínica VetAmigo</p>
-                <p className="text-xs text-gray-400">Admin</p>
+                <p className="text-sm font-semibold text-gray-900 leading-tight">{user?.clinicName ?? "Mi Clínica"}</p>
+                <p className="text-xs text-gray-400">{user?.name ?? "Admin"}</p>
               </div>
             </div>
           </div>

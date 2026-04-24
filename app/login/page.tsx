@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { login, getSession } from "../lib/auth";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -9,6 +10,11 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  // Redirect if already logged in
+  useEffect(() => {
+    if (getSession()) router.replace("/admin");
+  }, [router]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -18,10 +24,16 @@ export default function LoginPage() {
       return;
     }
     setLoading(true);
+    // Small delay for UX
     setTimeout(() => {
+      const err = login(email, password);
       setLoading(false);
-      router.push("/admin");
-    }, 1200);
+      if (err) {
+        setError(err);
+      } else {
+        router.push("/admin");
+      }
+    }, 600);
   };
 
   return (
@@ -130,9 +142,14 @@ export default function LoginPage() {
                 />
               </div>
               <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1.5">
-                  Contraseña
-                </label>
+                <div className="flex items-center justify-between mb-1.5">
+                  <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                    Contraseña
+                  </label>
+                  <a href="/recuperar-acceso" className="text-xs text-primary hover:text-primary-dark transition-colors">
+                    ¿Olvidaste tu contraseña?
+                  </a>
+                </div>
                 <input
                   id="password"
                   type="password"
@@ -166,8 +183,14 @@ export default function LoginPage() {
               </button>
             </form>
 
-            <div className="mt-6 text-center">
-              <a href="/" className="text-sm text-primary hover:text-primary-dark transition-colors font-medium">
+            <div className="mt-6 text-center space-y-3">
+              <p className="text-sm text-gray-500">
+                ¿No tienes cuenta?{" "}
+                <a href="/registro" className="text-primary hover:text-primary-dark font-semibold transition-colors">
+                  Registra tu clínica
+                </a>
+              </p>
+              <a href="/" className="inline-block text-sm text-primary hover:text-primary-dark transition-colors font-medium">
                 &larr; Volver al inicio
               </a>
             </div>
