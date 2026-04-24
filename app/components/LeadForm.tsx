@@ -10,10 +10,11 @@ export default function LeadForm() {
   const [whatsapp, setWhatsapp] = useState("");
   const [ciudad, setCiudad] = useState("");
   const [email, setEmail] = useState("");
+  const [mensaje, setMensaje] = useState("");
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    track("form_submit_lead", { nombre, clinica, whatsapp, ciudad, email });
+    track("form_submit_demo", { nombre, clinica, whatsapp, ciudad, email, mensaje });
     setSubmitted(true);
   }
 
@@ -27,7 +28,7 @@ export default function LeadForm() {
         </div>
         <h3 className="text-xl font-bold text-white mb-3">¡Listo!</h3>
         <p className="text-white/75 text-sm leading-relaxed">
-          Te contactaremos pronto por WhatsApp para agendar tu demo personalizada.
+          Recibimos tu solicitud. Te escribiremos por WhatsApp para agendar la demo.
         </p>
       </div>
     );
@@ -86,11 +87,19 @@ export default function LeadForm() {
         className="w-full bg-white/[0.07] border border-white/[0.12] rounded-xl px-4 py-3 text-white placeholder:text-white/35 focus:ring-2 focus:ring-accent/40 focus:border-accent/40 focus:bg-white/[0.1] outline-none transition-all text-sm"
       />
 
+      <input
+        type="text"
+        value={mensaje}
+        onChange={(e) => setMensaje(e.target.value)}
+        placeholder="¿Qué necesitas? (opcional)"
+        className="w-full bg-white/[0.07] border border-white/[0.12] rounded-xl px-4 py-3 text-white placeholder:text-white/35 focus:ring-2 focus:ring-accent/40 focus:border-accent/40 focus:bg-white/[0.1] outline-none transition-all text-sm"
+      />
+
       <button
         type="submit"
         className="w-full bg-accent hover:bg-amber-400 text-gray-900 font-bold py-3.5 rounded-xl text-base transition-all shadow-lg shadow-amber-500/25 hover:shadow-xl hover:shadow-amber-500/30 cursor-pointer hover:-translate-y-0.5"
       >
-        Solicitar demo gratis
+        Pruébalo gratis 14 días
       </button>
     </form>
   );
