@@ -142,7 +142,7 @@ export default function Home() {
               <div className="mt-9 flex flex-col sm:flex-row gap-3.5">
                 <a
                   href="#lead-form"
-                  data-track="click_free_trial"
+                  data-track="click_cta_pruebalo_gratis"
                   data-track-label="hero"
                   className="inline-flex items-center justify-center bg-accent hover:bg-amber-400 text-gray-900 font-bold px-8 py-4 rounded-xl text-[0.9375rem] transition-all shadow-lg shadow-amber-500/25 hover:shadow-xl hover:shadow-amber-500/30 hover:-translate-y-0.5"
                 >
@@ -573,7 +573,7 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-3.5 justify-center">
             <a
               href="#lead-form"
-              data-track="click_free_trial"
+              data-track="click_cta_pruebalo_gratis"
               data-track-label="cta_final"
               className="inline-flex items-center justify-center bg-accent hover:bg-amber-400 text-gray-900 font-bold px-8 py-4 rounded-xl text-[0.9375rem] transition-all shadow-lg shadow-amber-500/25 hover:shadow-xl hover:shadow-amber-500/30 hover:-translate-y-0.5"
             >
