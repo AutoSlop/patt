@@ -62,7 +62,7 @@ export default function PricingCard({
           ))}
         </ul>
         <button
-          onClick={() => { track("begin_checkout", { plan: name, price }); setShowModal(true); }}
+          onClick={() => { track("start_checkout", { plan: name, price }); setShowModal(true); }}
           className={`w-full py-3 rounded-xl font-bold transition-all cursor-pointer hover:-translate-y-0.5 text-sm ${
             highlighted
               ? "bg-white text-primary hover:bg-gray-50 shadow-sm hover:shadow-md"

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { track } from "../lib/track";
 
 export default function LeadForm() {
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<"idle" | "loading" | "success">("idle");
   const [nombre, setNombre] = useState("");
   const [clinica, setClinica] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
@@ -14,11 +14,31 @@ export default function LeadForm() {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    setStatus("loading");
     track("submit_lead_form", { nombre, clinica, whatsapp, ciudad, email, mensaje });
-    setSubmitted(true);
+    setTimeout(() => setStatus("success"), 1200);
   }
 
-  if (submitted) {
+  function handleReset() {
+    setNombre("");
+    setClinica("");
+    setWhatsapp("");
+    setCiudad("");
+    setEmail("");
+    setMensaje("");
+    setStatus("idle");
+  }
+
+  if (status === "loading") {
+    return (
+      <div className="bg-white/[0.12] backdrop-blur-md rounded-2xl p-7 sm:p-9 border border-white/[0.08] text-center shadow-xl shadow-black/10 flex flex-col items-center justify-center min-h-[260px]">
+        <div className="w-10 h-10 border-4 border-accent border-t-transparent rounded-full animate-spin mb-4" />
+        <p className="text-white/80 text-sm font-medium">Enviando solicitud...</p>
+      </div>
+    );
+  }
+
+  if (status === "success") {
     return (
       <div className="bg-white/[0.12] backdrop-blur-md rounded-2xl p-7 sm:p-9 border border-white/[0.08] text-center shadow-xl shadow-black/10">
         <div className="w-16 h-16 bg-accent/20 rounded-2xl flex items-center justify-center mx-auto mb-5">
@@ -27,9 +47,15 @@ export default function LeadForm() {
           </svg>
         </div>
         <h3 className="text-xl font-bold text-white mb-3">¡Listo!</h3>
-        <p className="text-white/75 text-sm leading-relaxed">
-          Recibimos tu solicitud. Te escribiremos por WhatsApp para agendar la demo.
+        <p className="text-white/75 text-sm leading-relaxed mb-5">
+          Te contactaremos pronto para agendar tu demo.
         </p>
+        <button
+          onClick={handleReset}
+          className="text-accent hover:text-amber-300 text-sm font-medium underline underline-offset-2 transition-colors cursor-pointer"
+        >
+          Enviar otra solicitud
+        </button>
       </div>
     );
   }
@@ -99,7 +125,7 @@ export default function LeadForm() {
         type="submit"
         className="w-full bg-accent hover:bg-amber-400 text-gray-900 font-bold py-3.5 rounded-xl text-base transition-all shadow-lg shadow-amber-500/25 hover:shadow-xl hover:shadow-amber-500/30 cursor-pointer hover:-translate-y-0.5"
       >
-        Pruébalo gratis 14 días
+        Quiero mi demo
       </button>
     </form>
   );

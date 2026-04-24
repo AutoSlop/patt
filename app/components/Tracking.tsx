@@ -12,6 +12,7 @@ export default function Tracking() {
   useEffect(() => {
     if (typeof window === "undefined") return;
     window.dataLayer = window.dataLayer || [];
+    window.trackEvent = track;
 
     function handleClick(e: MouseEvent) {
       const el = (e.target as HTMLElement).closest("[data-track]");
