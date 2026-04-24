@@ -15,7 +15,7 @@ export default function LeadForm() {
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setStatus("loading");
-    track("submit_lead_form", { nombre, clinica, whatsapp, ciudad, email, mensaje });
+    track("form_submit_lead", { nombre, clinica, whatsapp, ciudad, email, mensaje });
     setTimeout(() => setStatus("success"), 1200);
   }
 
